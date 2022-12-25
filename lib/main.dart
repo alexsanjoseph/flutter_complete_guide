@@ -16,11 +16,13 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State {
   var questionIndex = 0;
-  void answerQuestion() {
+  int totalScore = 0;
+  void answerQuestion(int score) {
     print("Chosen!!");
     setState(() {
       questionIndex = (questionIndex + 1);
     });
+    totalScore += score;
   }
 
   var questions = [
@@ -43,7 +45,7 @@ class MyAppState extends State {
         ),
         body: questionIndex < questions.length
             ? Quiz(questions, questionIndex, answerQuestion)
-            : Result(),
+            : Result(totalScore),
       ),
     );
   }
