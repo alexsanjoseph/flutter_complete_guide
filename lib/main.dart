@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_guide/answer.dart';
 import './question.dart';
 
 void main() {
@@ -21,7 +22,18 @@ class MyAppState extends State {
     });
   }
 
-  var questions = ["First questions", "Last question"];
+  var questions = [
+    {
+      "question": "Fav Color",
+      "answer": "Blue",
+      "options": ["Red", "Yellow", "Green", "Blue"]
+    },
+    {
+      "question": "Fav Animal",
+      "answer": "Tiger",
+      "options": ["Lion", "Tiger", "Mosquito", "Green"]
+    }
+  ];
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
@@ -30,15 +42,10 @@ class MyAppState extends State {
         ),
         body: Column(
           children: <Widget>[
-            Question(questions[questionIndex]),
-            ElevatedButton(
-              onPressed: answerQuestion,
-              child: Text("Answer 1"),
-            ),
-            ElevatedButton(
-              onPressed: null,
-              child: Text("Answer 2"),
-            ),
+            Question(questions[questionIndex]['question']),
+            ...(questions[questionIndex]['options'] as List<String>)
+                .map((answer) => Answer(answer, answerQuestion))
+                .toList(),
           ],
         ),
       ),
