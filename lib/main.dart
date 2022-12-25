@@ -25,6 +25,13 @@ class MyAppState extends State {
     totalScore += score;
   }
 
+  void resetApp() {
+    setState(() {
+      questionIndex = 0;
+      totalScore = 0;
+    });
+  }
+
   var questions = [
     {
       "question": "Fav Color",
@@ -45,7 +52,7 @@ class MyAppState extends State {
         ),
         body: questionIndex < questions.length
             ? Quiz(questions, questionIndex, answerQuestion)
-            : Result(totalScore),
+            : Result(totalScore, resetApp),
       ),
     );
   }
