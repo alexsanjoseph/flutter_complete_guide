@@ -18,7 +18,7 @@ class MyAppState extends State {
   void answerQuestion() {
     print("Chosen!!");
     setState(() {
-      questionIndex = (questionIndex + 1) % 2;
+      questionIndex = (questionIndex + 1);
     });
   }
 
@@ -40,14 +40,16 @@ class MyAppState extends State {
         appBar: AppBar(
           title: Text("Hello worlds!"),
         ),
-        body: Column(
-          children: <Widget>[
-            Question(questions[questionIndex]['question']),
-            ...(questions[questionIndex]['options'] as List<String>)
-                .map((answer) => Answer(answer, answerQuestion))
-                .toList(),
-          ],
-        ),
+        body: questionIndex < questions.length
+            ? Column(
+                children: <Widget>[
+                  Question(questions[questionIndex]['question'] as String),
+                  ...(questions[questionIndex]['options'] as List<String>)
+                      .map((answer) => Answer(answer, answerQuestion))
+                      .toList(),
+                ],
+              )
+            : Center(child: Text("Done!")),
       ),
     );
   }
