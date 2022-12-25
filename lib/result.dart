@@ -8,8 +8,17 @@ class Result extends StatelessWidget {
 
   Result(this.score);
 
+  String get resultPhrase {
+    return "Final Score is: " + score.toString();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("Final Score is: " + score.toString()));
+    return Center(
+      child: Text(
+        resultPhrase,
+        style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+      ),
+    );
   }
 }
